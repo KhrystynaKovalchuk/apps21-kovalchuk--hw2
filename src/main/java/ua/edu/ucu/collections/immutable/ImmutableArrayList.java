@@ -4,69 +4,115 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public final class ImmutableArrayList implements ImmutableList {
+    private Object[] els;
+
     public ImmutableArrayList(Object[] elements) {
+        this.els = new Object[elements.length];
+        System.arraycopy(elements, 0, this.els, 0, elements.length);
     }
 
     public ImmutableArrayList() {
+        this.els = new Object[0];
     }
 
     @Override
     public ImmutableList add(Object e) {
-        return null;
+        return add(size(), e);
     }
 
     @Override
     public ImmutableList add(int index, Object e) {
-        return null;
+        return addAll(index, new Object[]{e});
     }
 
     @Override
     public ImmutableList addAll(Object[] c) {
-        return null;
+        return addAll(size(), c);
     }
 
     @Override
     public ImmutableList addAll(int index, Object[] c) {
-        return null;
+        if (index > size() || index < 0){
+            throw new IllegalArgumentException();
+        }
+        Object[] elements = new Object[size() + c.length];
+        int ind = 0;
+
+        for (int i = 0; i < index; i++) {
+            elements[ind] = this.els[i];
+            ind++;
+        }
+        for (Object o : c) {
+            elements[ind] = o;
+            ind++;
+        }
+        for (Object el : els) {
+            elements[ind] = el;
+            ind++;
+        }
+        return new ImmutableLinkedList(elements);
     }
 
     @Override
     public Object get(int index) {
-        return null;
+        if (index > size() || index < 0){
+            throw new IllegalArgumentException();
+        }
+        return this.els[index];
     }
 
     @Override
     public ImmutableList remove(int index) {
-        return null;
+        Object[] elements = new Object[size()-1];
+
+        int ind = 0;
+        for (int i = 0; i < size(); i++) {
+            if (i != index) {
+                elements[i] = els[ind++];
+            } else {
+                ind++;
+            }
+        }
+        return new ImmutableLinkedList(elements);
     }
 
     @Override
     public ImmutableList set(int index, Object e) {
-        return null;
+        Object[] elements = new Object[size()];
+        System.arraycopy(els, 0, elements, 0, size());
+        elements[index] = e;
+        return new ImmutableLinkedList(elements);
     }
 
     @Override
     public int indexOf(Object e) {
-        return 0;
+        for (int i = 0; i < size(); i++) {
+            if (els[i] == e) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public int size() {
-        return 0;
+        return this.els.length;
     }
 
     @Override
     public ImmutableList clear() {
-        return null;
+        return new ImmutableArrayList();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return this.els.length == 0;
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] elements = new Object[size()];
+        System.arraycopy(this.els, 0, elements, 0, size());
+        return elements;
     }
 }
