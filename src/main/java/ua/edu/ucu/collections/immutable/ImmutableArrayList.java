@@ -1,8 +1,5 @@
 package ua.edu.ucu.collections.immutable;
 
-import java.util.Arrays;
-import java.util.Objects;
-
 public final class ImmutableArrayList implements ImmutableList {
     private Object[] els;
 
@@ -32,7 +29,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList addAll(int index, Object[] c) {
-        if (index > size() || index < 0){
+        if (index > size() || index < 0) {
             throw new IllegalArgumentException();
         }
         Object[] elements = new Object[size() + c.length];
@@ -55,7 +52,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public Object get(int index) {
-        if (index > size() || index < 0){
+        if (index > size() || index < 0) {
             throw new IllegalArgumentException();
         }
         return this.els[index];

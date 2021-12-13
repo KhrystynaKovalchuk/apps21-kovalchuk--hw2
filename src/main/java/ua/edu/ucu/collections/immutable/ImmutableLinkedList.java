@@ -13,7 +13,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
         head = prev;
 
-        for (int i = 1; i < elements.length - 1; i ++) {
+        for (int i = 1; i < elements.length - 1; i++) {
             Node node = new Node();
 
             node.setValue(elements[i]);
@@ -56,7 +56,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public ImmutableList addAll(int index, Object[] c) {
-        if (index > length || index < 0){
+        if (index > length || index < 0) {
             throw new IllegalArgumentException();
         }
 
@@ -71,7 +71,7 @@ public final class ImmutableLinkedList implements ImmutableList {
             ind++;
         }
 
-        for (Object element: c){
+        for (Object element: c) {
             els[ind] = element;
             ind++;
         }
@@ -86,7 +86,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public Object get(int index) {
-        if (index > length || index < 0){
+        if (index > length || index < 0) {
             throw new IllegalArgumentException();
         }
 
@@ -107,7 +107,7 @@ public final class ImmutableLinkedList implements ImmutableList {
         int counter = 0;
         Node nodeHead = this.head;
 
-        for (int i = 0; i < size(); i++){
+        for (int i = 0; i < size(); i++) {
             if (i != index) {
                 els[counter++] = nodeHead.getValue();
                 nodeHead = nodeHead.getNext();
@@ -124,7 +124,7 @@ public final class ImmutableLinkedList implements ImmutableList {
         Object[] els = new Object[size()];
         Node headNode = head;
 
-        for (int i = 0; i<size(); i++) {
+        for (int i = 0; i < size(); i++) {
             if (i != index) {
                 els[i] = headNode.getValue();
             }
@@ -140,7 +140,7 @@ public final class ImmutableLinkedList implements ImmutableList {
     public int indexOf(Object e) {
         Node headNode = head;
 
-        for (int i =0; i < size(); i++) {
+        for (int i = 0; i < size(); i++) {
             if (headNode.getValue() == e) {
                 return i;
             }
